@@ -3,5 +3,5 @@
 This an automatically built image used in integration tests for
 [go-dockerclient](http://github.com/fsouza/go-dockerclient/).
 
-See fsouza/go-dockerclient#353 and
+See [fsouza/go-dockerclient#353](https://github.com/fsouza/go-dockerclient/issues/353) and
 https://hub.docker.com/r/fsouza/go-dockerclient-integration for more details.
