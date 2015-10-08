@@ -1,4 +1,5 @@
-#go-dockerclient-integration
+go-dockerclient-integration
+===========================
 
 This an automatically built image used in integration tests for
 [go-dockerclient](http://github.com/fsouza/go-dockerclient/).
