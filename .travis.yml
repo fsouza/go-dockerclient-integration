@@ -6,5 +6,5 @@ os:
   - windows
 script:
   - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-  - docker build -f Dockerfile.${TRAVIS_OS_NAME} -t fsouza/go-dockerclient-integration:${TRAVIS_OS_NAME}
+  - docker build -f Dockerfile.${TRAVIS_OS_NAME} -t fsouza/go-dockerclient-integration:${TRAVIS_OS_NAME} .
   - docker push fsouza/go-dockerclient-integration
