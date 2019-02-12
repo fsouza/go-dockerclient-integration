@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian
 
 RUN useradd -m gopher
 ADD . /home/gopher
