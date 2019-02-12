@@ -1,0 +1,4 @@
+FROM mcr.microsoft.com/windows/servercore:1803
+
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+ADD file.txt C:\file.txt

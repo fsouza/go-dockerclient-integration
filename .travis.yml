@@ -1,0 +1,10 @@
+language: shell
+services:
+  - docker
+os:
+  - linux
+  - windows
+script:
+  - docker login -u fsouza -p "${DOCKER_PASSWORD}"
+  - docker build -f Dockerfile.${TRAVIS_OS_NAME} -t fsouza/go-dockerclient-integration:${TRAVIS_OS_NAME}
+  - docker push fsouza/go-dockerclient-integration
