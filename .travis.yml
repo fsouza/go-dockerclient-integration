@@ -2,9 +2,38 @@ language: shell
 services:
   - docker
 os:
-  - linux
   - windows
+  - linux-ppc64le
+  - linux
+
+env:
+  global:
+    - REPO="fsouza/go-dockerclient-integration"
+
 script:
-  - docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-  - docker build -f Dockerfile.${TRAVIS_OS_NAME} -t fsouza/go-dockerclient-integration:${TRAVIS_OS_NAME} .
-  - docker push fsouza/go-dockerclient-integration
+  - |
+      if [ $(uname -m) = ppc64le ]; then
+        TAG=linux_ppc64le
+      else
+        TAG=${TRAVIS_OS_NAME}
+      fi
+  - docker build -f Dockerfile.${TRAVIS_OS_NAME} -t ${REPO}:${TAG} .
+
+after_success:
+  - |
+      if [ "$TRAVIS_EVENT_TYPE" != "pull_request" ] &&
+         [ "$TRAVIS_BRANCH" = "master" ]; then
+        docker images
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker push ${REPO}:${TAG}
+      fi
+
+jobs:
+  include:
+    - stage: build_multi_arch_docker_image_latest
+      os: linux-ppc64le
+      env: RELEASE=latest
+      before_install: true
+      install: true
+      after_success: true
+      script: ./.travis-manifest.sh
