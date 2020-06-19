@@ -1,7 +1,7 @@
 #!/bin/sh
 set -x -v
 if [ "$TRAVIS_EVENT_TYPE" != "pull_request" ] &&
-   [ "$TRAVIS_BRANCH" = "master" ]; then
+   [ "$TRAVIS_BRANCH" = "main" ]; then
      mkdir -p ~/.docker
      echo '{ "experimental" : "enabled" }' > ~/.docker/config.json
      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
